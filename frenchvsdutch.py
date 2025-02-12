@@ -29,19 +29,25 @@ df["Hates"].fillna("Nothing (Too chill to hate)", inplace=True)
 # Normalize "Drinks" column: Replace unexpected drinks
 df["Drinks"] = df["Drinks"].apply(lambda x: "Beer" if x == "CocaCola" else x)
 
-# Analyze the most common traits
-most_loved = df["Loves"].mode()[0]
-most_hated = df["Hates"].mode()[0]
-most_drunk = df["Drinks"].mode()[0]
+# Pick a random nationality to analyze
+random_nationality = random.choice(["French", "Dutch"])
+filtered_df = df[df["Nationality"] == random_nationality]
+
+# Randomly select one value from each category
+most_loved = random.choice(filtered_df["Loves"].tolist())
+most_hated = random.choice(filtered_df["Hates"].tolist())
+most_drunk = random.choice(filtered_df["Drinks"].tolist())
 
 # Print the funny analysis
 print(f"""
 French VS Dutch - A Completely Serious and Scientific Analysis 
 
-Most Loved Thing Overall: {most_loved}
-Most Hated Thing Overall: {most_hated}
+Analyzing the {random_nationality} people...
+
+Most Loved Thing: {most_loved}
+Most Hated Thing: {most_hated}
 Most Consumed Drink: {most_drunk}
 
-Conclusion: The French are probably on strike while the Dutch cycle around them, avoiding hills and spending no money. 
-Meanwhile, both nations continue their eternal struggle over who has the best cheese. 
+Conclusion: The {random_nationality} are continuing their traditions. The French might be on strike, while the Dutch are cycling past them, avoiding hills and spending no money. 
+Meanwhile, both nations still can't agree on whose cheese is better. 
 """)
